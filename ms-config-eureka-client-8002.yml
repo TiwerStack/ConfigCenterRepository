@@ -87,7 +87,7 @@ mybatis:
 spring:
   profiles: bus
   application:
-    name: microserver-product-bus #服务与服务之间相互调用根据这个
+    name: microserver-product-bus02 #服务与服务之间相互调用根据这个
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource # 当前数据源操作类型
     driver-class-name: com.mysql.cj.jdbc.Driver #驱动
