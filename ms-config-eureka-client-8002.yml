@@ -38,7 +38,7 @@ eureka:
 logging:
   level:
     com.xx.mapper: INFO
-#开发环境的配置
+#开发环境的配置1
 ---
 server:
   port: 8002
