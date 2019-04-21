@@ -1,0 +1,77 @@
+#注意：如果在记事本上编写，下面的缩进不要使用Tab来缩进，不然报错
+spring:
+  profiles:
+    active: dev # 激活开发环境配置
+---
+server:
+  port: 8002
+mybatis:
+  config-location: classpath:mybatis/mybatis.cfg.xml #mabatis的配置文件
+  type-aliases-package: com.xx.springcloud.entities #所以Entity别名类所在包
+  mapper-locations: classpath:mybatis/mapper/**/*.xml #mapper映射文件
+
+spring:
+  profiles: prod
+  application:
+    name: microserver-product-prod #服务与服务之间相互调用根据这个
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource # 当前数据源操作类型
+    driver-class-name: com.mysql.cj.jdbc.Driver #驱动
+    url: jdbc:mysql://127.0.0.1:3306/springcloud_db02?serverTimezone=GMT%2B8 # 数据库
+    username: root
+    password: 123456
+    dbcp2:
+    min-idle: 5 # 数据库连接池的最小维持连接数
+    initial-size: 5 # 初始化连接数
+    max-total: 5 # 最大连接数
+    max-wait-millis: 150 # 等待连接获
+eureka:
+  client:
+    register-with-eureka: true #注册服务开启
+    fetch-registry: true #服务发现开关
+    service-url:
+      # 集群版 Eureka 服务注册中心
+      defaultZone: http://eureka6003.com:6003/eureka/,http://eureka6001.com:6001/eureka/
+  instance:
+    instance-id: ${spring.application.name}:${server.port} #指定实力id
+    prefer-ip-address: true #访问路径可以显示IP地址
+logging:
+  level:
+    com.xx.mapper: INFO
+#开发环境的配置
+---
+server:
+  port: 8002
+mybatis:
+  config-location: classpath:mybatis/mybatis.cfg.xml #mabatis的配置文件
+  type-aliases-package: com.xx.springcloud.entities #所以Entity别名类所在包
+  mapper-locations: classpath:mybatis/mapper/**/*.xml #mapper映射文件
+
+spring:
+  profiles: dev
+  application:
+    name: microserver-product-dev #服务与服务之间相互调用根据这个
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource # 当前数据源操作类型
+    driver-class-name: com.mysql.cj.jdbc.Driver #驱动
+    url: jdbc:mysql://127.0.0.1:3306/springcloud_db01?serverTimezone=GMT%2B8 # 数据库
+    username: root
+    password: 123456
+    dbcp2:
+    min-idle: 5 # 数据库连接池的最小维持连接数
+    initial-size: 5 # 初始化连接数
+    max-total: 5 # 最大连接数
+    max-wait-millis: 150 # 等待连接获
+eureka:
+  client:
+    register-with-eureka: true #注册服务开启
+    fetch-registry: true #服务发现开关
+    service-url:
+      # 集群版 Eureka 服务注册中心
+      defaultZone: http://eureka6003.com:6003/eureka/,http://eureka6001.com:6001/eureka/
+  instance:
+    instance-id: ${spring.application.name}:${server.port} #指定实力id
+    prefer-ip-address: true #访问路径可以显示IP地址
+logging:
+  level:
+    com.xx.mapper: DEBUG
